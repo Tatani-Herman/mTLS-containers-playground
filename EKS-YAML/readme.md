@@ -43,29 +43,9 @@ terraform apply
 After successful deployment, you can verify the resources:
 
 ```bash
-# Update your kubeconfig
 aws eks update-kubeconfig --name <cluster-name> --region <region>
-
-# Check cluster status
 kubectl get nodes
-
-# Verify deployed resources
 kubectl get pods,services,configmaps,secrets
-```
-
-## Alternative Approach
-
-If you continue experiencing issues, you can also deploy each resource type separately:
-
-```bash
-# Deploy infrastructure
-terraform apply -target=module.vpc -target=module.eks
-
-# Deploy Kubernetes resources individually
-terraform apply -target=kubernetes_manifest.hello_tls_secret
-terraform apply -target=kubernetes_manifest.configmap  
-terraform apply -target=kubernetes_manifest.deployment
-terraform apply -target=kubernetes_manifest.service
 ```
 
 # Test mTLS app

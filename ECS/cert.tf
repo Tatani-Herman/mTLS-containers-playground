@@ -53,7 +53,7 @@ resource "tls_locally_signed_cert" "server_cert" {
   ]
 }
 
-# Client cert (optional)
+# Client cert
 resource "tls_private_key" "client_key" {
   algorithm = "RSA"
   rsa_bits  = 2048

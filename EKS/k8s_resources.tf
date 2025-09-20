@@ -8,7 +8,7 @@ resource "kubernetes_namespace" "hello" {
   ]
 }
 
-# Create secret with server TLS (server cert + key) in the namespace ingress-nginx expects (we'll store it in hello namespace and reference)
+# Create secret with server TLS (server cert + key) in the namespace ingress-nginx expects
 resource "kubernetes_secret" "server_tls" {
   metadata {
     name      = "hello-server-tls"
