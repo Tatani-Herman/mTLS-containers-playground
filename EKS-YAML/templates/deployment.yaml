@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-deployment
+  namespace: hello
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello
+  template:
+    metadata:
+      labels:
+        app: hello
+    spec:
+      containers:
+      - name: hello-container
+        image: nginx:alpine
+        ports:
+        - containerPort: 443
+        volumeMounts:
+        - name: tls-certs
+          mountPath: /etc/nginx/tls
+          readOnly: true
+        - name: nginx-config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+      volumes:
+      - name: tls-certs
+        secret:
+          secretName: hello-tls
+      - name: nginx-config
+        configMap:
+          name: nginx-mtls-config
